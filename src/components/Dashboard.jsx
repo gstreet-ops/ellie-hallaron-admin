@@ -8,6 +8,7 @@ import BioSection from './sections/BioSection';
 import SocialSection from './sections/SocialSection';
 import SettingsSection from './sections/SettingsSection';
 import QuizSection from './sections/QuizSection';
+import HelpSection from './sections/HelpSection';
 
 const SECTIONS = {
   books: BooksSection,
@@ -15,6 +16,7 @@ const SECTIONS = {
   social: SocialSection,
   settings: SettingsSection,
   quiz: QuizSection,
+  help: HelpSection,
 };
 
 const SITE_URL = 'https://gstreet-ops.github.io/ellie-hallaron-website/';
@@ -25,6 +27,7 @@ const SECTION_PREVIEW_MAP = {
   social: 'connect/',
   settings: '',
   quiz: 'trivia/',
+  help: '',
 };
 
 export default function Dashboard() {

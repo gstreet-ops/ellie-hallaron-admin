@@ -7,6 +7,7 @@ const NAV_ITEMS = [
   { key: 'social', label: 'Social Links', icon: '🔗' },
   { key: 'settings', label: 'Site Settings', icon: '⚙️' },
   { key: 'quiz', label: 'Quiz', icon: '❓' },
+  { key: 'help', label: 'Help', icon: 'ℹ️' },
 ];
 
 export default function Sidebar({ activeSection, onNavigate }) {
