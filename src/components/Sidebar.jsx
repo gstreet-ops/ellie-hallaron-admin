@@ -38,6 +38,16 @@ export default function Sidebar({ activeSection, onNavigate }) {
           </button>
         ))}
       </nav>
+      <a
+        href="https://gstreet-ops.github.io/ellie-hallaron-website/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="sidebar-link sidebar-view-site"
+        title="View Live Site"
+      >
+        <span className="sidebar-icon">🌐</span>
+        {!collapsed && <span className="sidebar-label">View Site</span>}
+      </a>
       <button className="sidebar-logout" onClick={signOut} title="Sign Out">
         <span className="sidebar-icon">🚪</span>
         {!collapsed && <span className="sidebar-label">Sign Out</span>}
