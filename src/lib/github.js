@@ -2,7 +2,7 @@ const REPO = 'gstreet-ops/ellie-hallaron-website';
 const API_BASE = `https://api.github.com/repos/${REPO}/contents`;
 const TOKEN_KEY = 'eh_admin_token';
 
-let _token = sessionStorage.getItem(TOKEN_KEY) || '';
+let _token = localStorage.getItem(TOKEN_KEY) || '';
 
 export function getToken() {
   return _token;
@@ -10,12 +10,12 @@ export function getToken() {
 
 export function setToken(token) {
   _token = token;
-  sessionStorage.setItem(TOKEN_KEY, token);
+  localStorage.setItem(TOKEN_KEY, token);
 }
 
 export function clearToken() {
   _token = '';
-  sessionStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(TOKEN_KEY);
 }
 
 export function hasToken() {
