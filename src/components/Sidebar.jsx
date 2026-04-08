@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { clearToken } from '../lib/github';
 
 const NAV_ITEMS = [
   { key: 'books', label: 'Books', icon: '📚' },
@@ -11,7 +11,7 @@ const NAV_ITEMS = [
 ];
 
 export default function Sidebar({ activeSection, onNavigate }) {
-  const { signOut } = useAuth();
+  const signOut = () => { clearToken(); window.location.reload(); };
   const [collapsed, setCollapsed] = useState(false);
 
   return (

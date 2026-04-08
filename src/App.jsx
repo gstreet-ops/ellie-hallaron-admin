@@ -1,20 +1,15 @@
-import { useAuth } from './contexts/AuthContext';
+import { useState } from 'react';
 import { DataProvider } from './contexts/DataContext';
-import Login from './pages/Login';
+import TokenLogin from './pages/TokenLogin';
 import Dashboard from './components/Dashboard';
+import { hasToken } from './lib/github';
 
 export default function App() {
-  const { user, loading } = useAuth();
+  const [authenticated, setAuthenticated] = useState(hasToken());
 
-  if (loading) {
-    return (
-      <div className="loading-screen">
-        <div className="spinner" />
-      </div>
-    );
+  if (!authenticated) {
+    return <TokenLogin onSuccess={() => setAuthenticated(true)} />;
   }
-
-  if (!user) return <Login />;
 
   return (
     <DataProvider>

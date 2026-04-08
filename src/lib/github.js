@@ -1,16 +1,37 @@
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
-const PROXY_URL = `${SUPABASE_URL}/functions/v1/github-proxy`;
+const REPO = 'gstreet-ops/ellie-hallaron-website';
+const API_BASE = `https://api.github.com/repos/${REPO}/contents`;
+const TOKEN_KEY = 'eh_admin_token';
+
+let _token = sessionStorage.getItem(TOKEN_KEY) || '';
+
+export function getToken() {
+  return _token;
+}
+
+export function setToken(token) {
+  _token = token;
+  sessionStorage.setItem(TOKEN_KEY, token);
+}
+
+export function clearToken() {
+  _token = '';
+  sessionStorage.removeItem(TOKEN_KEY);
+}
+
+export function hasToken() {
+  return !!_token;
+}
 
 function getHeaders() {
   return {
-    Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+    Authorization: `Bearer ${_token}`,
+    Accept: 'application/vnd.github.v3+json',
     'Content-Type': 'application/json',
   };
 }
 
 export async function fetchFile(path) {
-  const res = await fetch(`${PROXY_URL}?path=${encodeURIComponent(path)}`, {
+  const res = await fetch(`${API_BASE}/${path}`, {
     headers: getHeaders(),
   });
   if (!res.ok) throw new Error(`Failed to fetch ${path}: ${res.status}`);
@@ -20,14 +41,13 @@ export async function fetchFile(path) {
 }
 
 export async function saveFile(path, content, sha, message) {
-  const res = await fetch(PROXY_URL, {
+  const res = await fetch(`${API_BASE}/${path}`, {
     method: 'PUT',
     headers: getHeaders(),
     body: JSON.stringify({
-      path,
+      message,
       content: encodeBase64(content),
       sha,
-      message,
     }),
   });
   if (!res.ok) {
